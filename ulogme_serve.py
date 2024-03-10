@@ -65,10 +65,10 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
     self.send_response(200)
     self.send_header('Content-type','text/html')
     self.end_headers()
-    self.wfile.write(result)
+    self.wfile.write(bytes(result, 'utf-8'))
 
 httpd = socketserver.ThreadingTCPServer((IP, PORT), CustomHandler)
 
-print('Serving ulogme, see it on http://localhost:',str(PORT))
+print(f'Serving ulogme, see it on http://localhost:{PORT}')
 httpd.serve_forever()
 
